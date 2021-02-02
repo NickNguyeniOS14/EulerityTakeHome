@@ -56,15 +56,31 @@
 		B6C40A4125C9A9280080FD37 /* EulerityTakeHome */ = {
 			isa = PBXGroup;
 			children = (
-				B6C40A4225C9A9280080FD37 /* AppDelegate.swift */,
-				B6C40A4425C9A9280080FD37 /* SceneDelegate.swift */,
+				B6C40A5725C9A95E0080FD37 /* Application */,
 				B6C40A4625C9A9280080FD37 /* ViewController.swift */,
-				B6C40A4825C9A9280080FD37 /* Main.storyboard */,
-				B6C40A4B25C9A9290080FD37 /* Assets.xcassets */,
-				B6C40A4D25C9A9290080FD37 /* LaunchScreen.storyboard */,
+				B6C40A5925C9A9690080FD37 /* Storyboards */,
 				B6C40A5025C9A9290080FD37 /* Info.plist */,
 			);
 			path = EulerityTakeHome;
+			sourceTree = "<group>";
+		};
+		B6C40A5725C9A95E0080FD37 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B6C40A4225C9A9280080FD37 /* AppDelegate.swift */,
+				B6C40A4425C9A9280080FD37 /* SceneDelegate.swift */,
+				B6C40A4B25C9A9290080FD37 /* Assets.xcassets */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B6C40A5925C9A9690080FD37 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				B6C40A4825C9A9280080FD37 /* Main.storyboard */,
+				B6C40A4D25C9A9290080FD37 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
