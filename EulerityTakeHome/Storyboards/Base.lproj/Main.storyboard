@@ -16,13 +16,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="80" id="WuL-bq-pUw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageCell" rowHeight="80" id="WuL-bq-pUw" customClass="ImageCell" customModule="EulerityTakeHome" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WuL-bq-pUw" id="VcT-SP-kxy">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-H2-RyZ">
+                                            <rect key="frame" x="28" y="10" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="Afe-Qn-Gbt"/>
+                                                <constraint firstAttribute="height" constant="60" id="rZ5-fC-lXs"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XfO-H2-RyZ" firstAttribute="leading" secondItem="VcT-SP-kxy" secondAttribute="leadingMargin" constant="8" id="CNQ-Ob-dba"/>
+                                        <constraint firstItem="XfO-H2-RyZ" firstAttribute="centerY" secondItem="VcT-SP-kxy" secondAttribute="centerY" id="QMl-X9-ETm"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImageView" destination="XfO-H2-RyZ" id="KzO-o4-xLG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

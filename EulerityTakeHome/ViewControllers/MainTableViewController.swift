@@ -13,9 +13,11 @@ class MainTableViewController: UITableViewController {
 
   var internalURLArray: [ImageObject] = []
 
+  let loader = ImageLoader()
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    networkService.downloadURLSFromServer { [weak self] (result) in
+    networkService.downloadURLSFromServer { [weak self] result in
       switch result {
         case .success(let urlArray):
           self?.internalURLArray = urlArray
@@ -28,21 +30,24 @@ class MainTableViewController: UITableViewController {
     }
   }
 
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView,
+                          numberOfRowsInSection section: Int) -> Int {
     return internalURLArray.count
   }
 
   override func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageCell
 
     let urlString = internalURLArray[indexPath.row].url
-    
-    cell.imageView?.loadImageUsingCache(withUrl: urlString)
+    let imageUrl = URL(string: urlString)!
+    cell.cellImageView.loadImage(at: imageUrl)
 
     return cell
   }
+
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
 }
-
-

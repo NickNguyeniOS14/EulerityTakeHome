@@ -16,6 +16,7 @@ extension UIImageView {
     
     // check cached image
     if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
+      
       self.image = cachedImage
       return
     }
@@ -35,5 +36,15 @@ extension UIImageView {
       }
       
     }).resume()
+  }
+}
+
+extension UIImageView {
+  func loadImage(at url: URL) {
+    UIImageLoader.loader.load(url, for: self)
+  }
+  
+  func cancelImageLoad() {
+    UIImageLoader.loader.cancel(for: self)
   }
 }
