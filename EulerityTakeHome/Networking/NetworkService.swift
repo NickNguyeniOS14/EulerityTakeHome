@@ -3,6 +3,7 @@ import UIKit
 class NetworkService {
 
   var urlArray: [ImageObject] = []
+  
   func downloadURLSFromServer(completion: @escaping (Result<[ImageObject], NetworkError>) -> Void) {
 
     let url = URL(string: "https://eulerity-hackathon.appspot.com/image")!
