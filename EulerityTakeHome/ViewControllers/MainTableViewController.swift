@@ -11,13 +11,7 @@ class MainTableViewController: UITableViewController {
 
   let networkService = NetworkService()
 
-  var internalURLArray: [ImageObject] = [] {
-    didSet {
-      DispatchQueue.main.async {
-        self.tableView.reloadData()
-      }
-    }
-  }
+  var internalURLArray: [ImageObject] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,8 +19,11 @@ class MainTableViewController: UITableViewController {
       switch result {
         case .success(let urlArray):
           self?.internalURLArray = urlArray
+          DispatchQueue.main.async {
+            self?.tableView.reloadData()
+          }
         case .failure(let error):
-          print(error)
+          print(error.localizedDescription)
       }
     }
   }
@@ -39,7 +36,8 @@ class MainTableViewController: UITableViewController {
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath)
-    let urlString = internalURLArray[indexPath.row].urlString
+
+    let urlString = internalURLArray[indexPath.row].url
     
     cell.imageView?.loadImageUsingCache(withUrl: urlString)
 

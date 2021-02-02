@@ -14,7 +14,7 @@
 		B6C40A4C25C9A9290080FD37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6C40A4B25C9A9290080FD37 /* Assets.xcassets */; };
 		B6C40A4F25C9A9290080FD37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6C40A4D25C9A9290080FD37 /* LaunchScreen.storyboard */; };
 		B6C40A5F25C9AB270080FD37 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A5E25C9AB270080FD37 /* NetworkService.swift */; };
-		B6C40A6225C9ABC90080FD37 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A6125C9ABC90080FD37 /* Image.swift */; };
+		B6C40A6225C9ABC90080FD37 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A6125C9ABC90080FD37 /* ImageObject.swift */; };
 		B6C40A6925C9ACEB0080FD37 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A6825C9ACEB0080FD37 /* NetworkError.swift */; };
 		B6C40A7D25C9B5850080FD37 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A7C25C9B5850080FD37 /* UIImageView+Ext.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		B6C40A4E25C9A9290080FD37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6C40A5025C9A9290080FD37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6C40A5E25C9AB270080FD37 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		B6C40A6125C9ABC90080FD37 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		B6C40A6125C9ABC90080FD37 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
 		B6C40A6825C9ACEB0080FD37 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B6C40A7C25C9B5850080FD37 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +70,7 @@
 				B6C40A5925C9A9690080FD37 /* Storyboards */,
 				B6C40A5025C9A9290080FD37 /* Info.plist */,
 				B6C40A6425C9AC010080FD37 /* Model */,
-				B6C40A7C25C9B5850080FD37 /* UIImageView+Ext.swift */,
+				B6C40A8125C9B9150080FD37 /* Extension */,
 			);
 			path = EulerityTakeHome;
 			sourceTree = "<group>";
@@ -105,7 +105,7 @@
 		B6C40A6425C9AC010080FD37 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B6C40A6125C9ABC90080FD37 /* Image.swift */,
+				B6C40A6125C9ABC90080FD37 /* ImageObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -117,6 +117,14 @@
 				B6C40A6825C9ACEB0080FD37 /* NetworkError.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		B6C40A8125C9B9150080FD37 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B6C40A7C25C9B5850080FD37 /* UIImageView+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,7 +203,7 @@
 				B6C40A7D25C9B5850080FD37 /* UIImageView+Ext.swift in Sources */,
 				B6C40A6925C9ACEB0080FD37 /* NetworkError.swift in Sources */,
 				B6C40A4525C9A9280080FD37 /* SceneDelegate.swift in Sources */,
-				B6C40A6225C9ABC90080FD37 /* Image.swift in Sources */,
+				B6C40A6225C9ABC90080FD37 /* ImageObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
