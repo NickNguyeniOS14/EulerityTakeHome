@@ -9,5 +9,4 @@ import UIKit
 
 struct ImageObject: Codable {
   let url: String
- 
 }

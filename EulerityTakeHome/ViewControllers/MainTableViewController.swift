@@ -16,6 +16,8 @@ class MainTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    tableView.rowHeight = 300
+    
     networkService.downloadURLSFromServer { [weak self] result in
       switch result {
         case .success(let urlArray):
@@ -41,13 +43,10 @@ class MainTableViewController: UITableViewController {
 
     let urlString = internalURLArray[indexPath.row].url
 
-    cell.setNeedsDisplay()
-
-    cell.cellImageView.loadImageUsingCache(withUrl: urlString)
+    cell.update(with: urlString)
 
     return cell
   }
-
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)

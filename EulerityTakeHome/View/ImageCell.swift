@@ -8,12 +8,23 @@ import UIKit
 
 class ImageCell: UITableViewCell {
 
-  @IBOutlet var cellImageView: UIImageView!
+  @IBOutlet weak var cellImageView: UIImageView!
+
+  func update(with urlString: String?) {
+    if let string = urlString {
+      cellImageView.loadImageUsingCache(withUrl: string)
+    } else {
+      cellImageView.image = nil
+    }
+  }
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    update(with: nil)
+  }
 
   override func prepareForReuse() {
     super.prepareForReuse()
-
-    cellImageView.image = nil
-
+    update(with: nil)
   }
 }
