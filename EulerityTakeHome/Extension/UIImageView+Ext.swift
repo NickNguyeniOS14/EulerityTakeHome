@@ -1,10 +1,3 @@
-//
-//  UIImageView+Ext.swift
-//  EulerityTakeHome
-//
-//  Created by Nick Nguyen on 2/2/21.
-//
-
 import UIKit
 
 let imageCache = NSCache<NSString, AnyObject>()
@@ -38,13 +31,13 @@ extension UIImageView {
     }).resume()
   }
 }
-
-extension UIImageView {
-  func loadImage(at url: URL) {
-    UIImageLoader.loader.load(url, for: self)
-  }
-  
-  func cancelImageLoad() {
-    UIImageLoader.loader.cancel(for: self)
-  }
-}
+//
+//extension UIImageView {
+//  func loadImage(at url: URL) {
+//    UIImageLoader.loader.load(url, for: self)
+//  }
+//  
+//  func cancelImageLoad() {
+//    UIImageLoader.loader.cancel(for: self)
+//  }
+//}

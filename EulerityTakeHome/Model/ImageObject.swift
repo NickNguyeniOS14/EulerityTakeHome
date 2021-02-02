@@ -5,8 +5,9 @@
 //  Created by Nick Nguyen on 2/2/21.
 //
 
-import Foundation
+import UIKit
 
 struct ImageObject: Codable {
   let url: String
+ 
 }

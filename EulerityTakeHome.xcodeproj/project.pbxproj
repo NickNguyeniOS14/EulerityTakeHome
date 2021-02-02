@@ -70,9 +70,9 @@
 		B6C40A4125C9A9280080FD37 /* EulerityTakeHome */ = {
 			isa = PBXGroup;
 			children = (
+				B6C40A5725C9A95E0080FD37 /* Application */,
 				B6C40A6B25C9AD060080FD37 /* Networking */,
 				B6C40A8925C9C75A0080FD37 /* View */,
-				B6C40A5725C9A95E0080FD37 /* Application */,
 				B6C40A5C25C9AA9D0080FD37 /* ViewControllers */,
 				B6C40A5925C9A9690080FD37 /* Storyboards */,
 				B6C40A5025C9A9290080FD37 /* Info.plist */,
