@@ -43,7 +43,7 @@ class MainTableViewController: UITableViewController {
 
     let urlString = internalURLArray[indexPath.row].url
 
-    cell.update(with: urlString)
+    cell.updateImage(with: urlString)
 
     return cell
   }

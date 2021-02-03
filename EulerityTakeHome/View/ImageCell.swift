@@ -1,30 +1,67 @@
-//
-//  ImageCell.swift
-//  EulerityTakeHome
-//
-//  Created by Nick Nguyen on 2/2/21.
-//
 import UIKit
 
 class ImageCell: UITableViewCell {
 
+  private var imageURL: String?
   @IBOutlet weak var cellImageView: UIImageView!
 
-  func update(with urlString: String?) {
-    if let string = urlString {
-      cellImageView.loadImageUsingCache(withUrl: string)
-    } else {
-      cellImageView.image = nil
+  private func loadImageUsingCache(withUrl urlString : String) {
+    let activityIndicator = UIActivityIndicatorView()
+    activityIndicator.style = .large
+    activityIndicator.color = .gray
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    self.addSubview(activityIndicator)
+    NSLayoutConstraint.activate([
+      activityIndicator.centerXAnchor.constraint(equalTo: cellImageView.centerXAnchor),
+      activityIndicator.centerYAnchor.constraint(equalTo: cellImageView.centerYAnchor)
+    ])
+    let url = URL(string: urlString)
+    self.cellImageView.image = nil
+    activityIndicator.startAnimating()
+    // Check cached image
+    if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
+      activityIndicator.stopAnimating()
+      activityIndicator.removeFromSuperview()
+      self.cellImageView.image = cachedImage
+
+      return
     }
+
+    // If not, download image from URL
+    URLSession.shared.dataTask(with: url!, completionHandler: { data, response, error in
+      if let error = error {
+        NSLog(error.localizedDescription)
+        return
+      }
+
+      guard let data = data else { return }
+
+      if let image = UIImage(data: data) {
+        imageCache.setObject(image, forKey: urlString as NSString)
+        DispatchQueue.main.async {
+          activityIndicator.stopAnimating()
+          activityIndicator.removeFromSuperview()
+          if url?.absoluteString == self.imageURL {
+            self.cellImageView.image = image
+          }
+        }
+      }
+    }
+    ).resume()
   }
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    update(with: nil)
+  func updateImage(with urlString: String?) {
+    if let urlString = urlString {
+      imageURL = urlString
+      loadImageUsingCache(withUrl: urlString)
+    } else {
+      cellImageView.image = nil
+      imageURL = nil
+    }
   }
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    update(with: nil)
+    imageURL = nil
   }
 }
