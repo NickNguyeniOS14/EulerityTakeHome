@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B69E15A125CAF68000E198C3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E15A025CAF68000E198C3 /* DetailViewController.swift */; };
 		B6C40A4325C9A9280080FD37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A4225C9A9280080FD37 /* AppDelegate.swift */; };
 		B6C40A4525C9A9280080FD37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A4425C9A9280080FD37 /* SceneDelegate.swift */; };
 		B6C40A4725C9A9280080FD37 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C40A4625C9A9280080FD37 /* MainTableViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B69E15A025CAF68000E198C3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B6C40A3F25C9A9280080FD37 /* EulerityTakeHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EulerityTakeHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C40A4225C9A9280080FD37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6C40A4425C9A9280080FD37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C40A4625C9A9280080FD37 /* MainTableViewController.swift */,
+				B69E15A025CAF68000E198C3 /* DetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B69E15A125CAF68000E198C3 /* DetailViewController.swift in Sources */,
 				B6C40A4725C9A9280080FD37 /* MainTableViewController.swift in Sources */,
 				B6C40A4325C9A9280080FD37 /* AppDelegate.swift in Sources */,
 				B6C40A8725C9C5300080FD37 /* ImageCell.swift in Sources */,

@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,10 +25,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-H2-RyZ">
-                                            <rect key="frame" x="57" y="-17.5" width="300" height="300"/>
+                                            <rect key="frame" x="7" y="-17.5" width="400" height="300"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="300" id="8Ao-3v-1ca"/>
-                                                <constraint firstAttribute="width" constant="300" id="LQY-6e-BHe"/>
+                                                <constraint firstAttribute="width" constant="400" id="MIx-nM-RxH"/>
+                                                <constraint firstAttribute="height" constant="300" id="Ou1-MF-Ant"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -38,6 +39,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cellImageView" destination="XfO-H2-RyZ" id="KzO-o4-xLG"/>
+                                    <segue destination="J0V-D0-V3C" kind="show" id="MuB-4t-Mex"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -51,6 +53,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pmo-JK-iSo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1255.072463768116" y="122.54464285714285"/>
+        </scene>
+        <!--Customization-->
+        <scene sceneID="Eh1-gb-8ld">
+            <objects>
+                <viewController id="J0V-D0-V3C" customClass="DetailViewController" customModule="EulerityTakeHome" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K0H-oo-PGc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4gO-H8-qmL">
+                                <rect key="frame" x="7" y="298" width="400" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="3bC-6r-6zp"/>
+                                    <constraint firstAttribute="width" constant="400" id="Ohr-cB-TRk"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eLk-EZ-bLr">
+                                <rect key="frame" x="32" y="758" width="350" height="72"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cti-CW-sXF" userLabel="Apply random filter">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
+                                        <state key="normal" title="Add random filters"/>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="J0V-D0-V3C" eventType="touchUpInside" id="vdb-pX-Fu4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wG-fQ-bzz" userLabel="Add Overlay Button">
+                                        <rect key="frame" x="0.0" y="42" width="350" height="30"/>
+                                        <state key="normal" title="Add overlay text"/>
+                                        <connections>
+                                            <action selector="addOverlayText:" destination="J0V-D0-V3C" eventType="touchUpInside" id="Jpl-WB-ygN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JvA-uq-Sof"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JvA-uq-Sof" firstAttribute="trailing" secondItem="eLk-EZ-bLr" secondAttribute="trailing" constant="32" id="0MU-kT-ALs"/>
+                            <constraint firstItem="JvA-uq-Sof" firstAttribute="bottom" secondItem="eLk-EZ-bLr" secondAttribute="bottom" constant="32" id="Y1Y-U7-Rti"/>
+                            <constraint firstItem="4gO-H8-qmL" firstAttribute="centerY" secondItem="K0H-oo-PGc" secondAttribute="centerY" id="hbp-s9-aL2"/>
+                            <constraint firstItem="eLk-EZ-bLr" firstAttribute="leading" secondItem="JvA-uq-Sof" secondAttribute="leading" constant="32" id="qdw-av-3fx"/>
+                            <constraint firstItem="4gO-H8-qmL" firstAttribute="centerX" secondItem="K0H-oo-PGc" secondAttribute="centerX" id="tSp-Ot-fxl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Customization" id="X6r-Xn-hCN">
+                        <barButtonItem key="rightBarButtonItem" title="Upload" id="c8o-zS-q4y">
+                            <connections>
+                                <action selector="uploadTapped:" destination="J0V-D0-V3C" id="wvr-zb-veU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="detailImageView" destination="4gO-H8-qmL" id="DD8-rX-oYr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jy3-BX-0CU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2163.768115942029" y="123.88392857142857"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xFg-Hz-tFx">

@@ -48,7 +48,16 @@ class MainTableViewController: UITableViewController {
     return cell
   }
 
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView,
+                          didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let destinationVC = segue.destination as! DetailViewController
+    if let indexPath = tableView.indexPathForSelectedRow {
+      let selectedImageURL = internalURLArray[indexPath.row]
+      destinationVC.selectedImage = selectedImageURL
+    }
   }
 }

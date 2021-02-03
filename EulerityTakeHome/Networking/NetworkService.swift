@@ -2,8 +2,6 @@ import UIKit
 
 class NetworkService {
 
-  var urlArray: [ImageObject] = []
-  
   func downloadURLSFromServer(completion: @escaping (Result<[ImageObject], NetworkError>) -> Void) {
 
     let url = URL(string: "https://eulerity-hackathon.appspot.com/image")!
@@ -26,7 +24,7 @@ class NetworkService {
         let urlArray = try jsonDecoder.decode([ImageObject].self, from: data)
         
         DispatchQueue.main.async {
-          self.urlArray = urlArray
+
           completion(.success(urlArray))
         }
       } catch {
