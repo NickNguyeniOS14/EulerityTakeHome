@@ -18,10 +18,10 @@ class MainTableViewController: UITableViewController {
 
     tableView.rowHeight = 300
     
-    networkService.downloadURLSFromServer { [weak self] result in
+    NetworkService.sharedInstance.getDataFrom(endpoint: .image) { [weak self] result in
       switch result {
         case .success(let urlArray):
-          self?.internalURLArray = urlArray
+          self?.internalURLArray = urlArray as! [ImageObject]
           DispatchQueue.main.async {
             self?.tableView.reloadData()
           }
@@ -57,7 +57,7 @@ class MainTableViewController: UITableViewController {
     let destinationVC = segue.destination as! DetailViewController
     if let indexPath = tableView.indexPathForSelectedRow {
       let selectedImageURL = internalURLArray[indexPath.row]
-      destinationVC.selectedImage = selectedImageURL
+      destinationVC.selectedImageURL = selectedImageURL
     }
   }
 }

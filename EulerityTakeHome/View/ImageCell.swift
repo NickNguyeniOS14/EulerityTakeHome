@@ -3,19 +3,21 @@ import UIKit
 class ImageCell: UITableViewCell {
 
   private var imageURL: String?
-  @IBOutlet weak var cellImageView: UIImageView!
-
+  
   private func loadImageUsingCache(withUrl urlString : String) {
+    self.isUserInteractionEnabled = false
+
     let activityIndicator = UIActivityIndicatorView()
     activityIndicator.style = .large
     activityIndicator.color = .gray
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    
     self.addSubview(activityIndicator)
     NSLayoutConstraint.activate([
       activityIndicator.centerXAnchor.constraint(equalTo: cellImageView.centerXAnchor),
       activityIndicator.centerYAnchor.constraint(equalTo: cellImageView.centerYAnchor)
     ])
-    let url = URL(string: urlString)
+    let url = URL(string: urlString)!
     self.cellImageView.image = nil
     activityIndicator.startAnimating()
     // Check cached image
@@ -23,12 +25,12 @@ class ImageCell: UITableViewCell {
       activityIndicator.stopAnimating()
       activityIndicator.removeFromSuperview()
       self.cellImageView.image = cachedImage
-
+      self.isUserInteractionEnabled = true
       return
     }
 
     // If not, download image from URL
-    URLSession.shared.dataTask(with: url!, completionHandler: { data, response, error in
+    URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
       if let error = error {
         NSLog(error.localizedDescription)
         return
@@ -41,8 +43,9 @@ class ImageCell: UITableViewCell {
         DispatchQueue.main.async {
           activityIndicator.stopAnimating()
           activityIndicator.removeFromSuperview()
-          if url?.absoluteString == self.imageURL {
+          if url.absoluteString == self.imageURL {
             self.cellImageView.image = image
+            self.isUserInteractionEnabled = true
           }
         }
       }
@@ -64,4 +67,5 @@ class ImageCell: UITableViewCell {
     super.prepareForReuse()
     imageURL = nil
   }
+  @IBOutlet weak var cellImageView: UIImageView!
 }
