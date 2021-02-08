@@ -57,7 +57,7 @@ class NetworkService {
     let boundary = "Boundary-\(UUID().uuidString)"
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     guard let selectedImageString = originalURLString else { return }
-    let params = ["appid": "nicknguyenios14",
+    let params = ["appid": "nicknguyenios14@gmail.com",
                   "original": selectedImageString]
     DispatchQueue.main.async {
       guard let imageData = imageData else { return }
