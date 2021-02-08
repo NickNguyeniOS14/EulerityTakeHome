@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreImage.CIFilterBuiltins
+import CoreGraphics
 
 class DetailViewController: UIViewController {
 
@@ -24,13 +25,9 @@ class DetailViewController: UIViewController {
   @IBAction func uploadTapped(_ sender: UIBarButtonItem) {
     guard let originalURL = selectedImageURL?.url else { return }
     guard let currentImage = detailImageView.image else { return }
-    NetworkService.sharedInstance.getDataFrom(endpoint:.upload,
-                                              completion: { result in
+    NetworkService.sharedInstance.getDataFrom(endpoint:.upload,completion: { result in
       if let uploadURL = try? result.get() as? UploadURL {
-        NetworkService.sharedInstance.uploadImage(to: uploadURL.url,
-                                                  original: originalURL,
-                                                  file: currentImage.jpegData(compressionQuality: 1.0)!)
-      }
+        NetworkService.sharedInstance.uploadImage(to: uploadURL.url,original: originalURL,file: currentImage.jpegData(compressionQuality: 1.0)!)}
     })
   }
 
@@ -60,6 +57,43 @@ class DetailViewController: UIViewController {
   }
 
   @IBAction func addOverlayText(_ sender: UIButton) {
-    // TODO
+    showAlertTextField()
+  }
+
+  private func textToImage(drawText text: String, inImage image: UIImage) -> UIImage {
+    UIGraphicsBeginImageContext(image.size)
+    defer { UIGraphicsEndImageContext() }
+    image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+    let font = UIFont(name: "Avenir Next", size: 400)!
+    let textStyle = NSMutableParagraphStyle()
+    textStyle.alignment = NSTextAlignment.center
+    let textColor = UIColor.white
+    let attributes = [NSAttributedString.Key.font:font,
+                      NSAttributedString.Key.paragraphStyle:textStyle, NSAttributedString.Key.foregroundColor:textColor]
+    let textHeight = font.lineHeight
+    let textY = (image.size.height - textHeight ) / 2
+    let textRect = CGRect(x: 0, y: textY, width: image.size.width, height: textHeight)
+    text.draw(in: textRect.integral, withAttributes: attributes)
+    let result = UIGraphicsGetImageFromCurrentImageContext()!
+    return result
+  }
+  private func showAlertTextField() {
+    let alert = UIAlertController(title: "Add overlay text",
+                                  message: "Add text to the image",
+                                  preferredStyle: .alert)
+
+    alert.addTextField {
+      (textField) in textField.placeholder = "Enter text"
+    }
+    alert.addAction(UIAlertAction(title: "Confirm",
+                                  style: .default,
+                                  handler: { action in
+                                    if let textField = alert.textFields?[0].text {
+                                      if let targetImage = self.detailImageView.image {
+                                        self.detailImageView.image = self.textToImage(drawText: textField,
+                                                                                      inImage: targetImage)
+                                      }}}))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    self.present(alert, animated: true, completion: nil)
   }
 }
