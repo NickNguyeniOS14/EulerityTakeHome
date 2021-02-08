@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreImage.CIFilterBuiltins
-import CoreGraphics
 
 class DetailViewController: UIViewController {
 
@@ -23,14 +22,65 @@ class DetailViewController: UIViewController {
   }
 
   @IBAction func uploadTapped(_ sender: UIBarButtonItem) {
-    guard let originalURL = selectedImageURL?.url else { return }
-    guard let currentImage = detailImageView.image else { return }
-    NetworkService.sharedInstance.getDataFrom(endpoint:.upload,completion: { result in
+    NetworkService.sharedInstance.getDataFrom(endpoint: .upload) { (result) in
       if let uploadURL = try? result.get() as? UploadURL {
-        NetworkService.sharedInstance.uploadImage(to: uploadURL.url,original: originalURL,file: currentImage.jpegData(compressionQuality: 1.0)!)}
-    })
+        self.sendMultipartRequest(to: uploadURL.url)
+      }
+    }
   }
 
+  func sendMultipartRequest(to urlString: String) {
+    var request = URLRequest(url: URL(string: urlString)!)
+    request.httpMethod = "POST"
+    let boundary = "Boundary-\(UUID().uuidString)"
+    request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+    guard let selectedImageString = selectedImageURL?.url else { return }
+    let params = ["appid": "nicknguyenios14",
+                  "original": selectedImageString]
+    DispatchQueue.main.async {
+      guard let imageData = self.detailImageView.image?.jpegData(compressionQuality: 0.8) else { return }
+      request.httpBody = self.createBody(parameters: params,
+                                    boundary: boundary,
+                                    data: imageData,
+                                    mimeType: "image/jpeg",
+                                    filename: "hello.jpeg")
+      URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let response = response as? HTTPURLResponse {
+          print("UPLOAD STATUS CODE is \(response.statusCode)")
+        }
+        if let error = error {
+          print(error)
+        }
+      }.resume()
+    }
+  }
+
+  private func createBody(parameters: [String: String],
+                  boundary: String,
+                  data: Data,
+                  mimeType: String,
+                  filename: String) -> Data {
+    
+    let body = NSMutableData()
+
+    let boundaryPrefix = "--\(boundary)\r\n"
+
+    for (key, value) in parameters {
+      body.appendString(boundaryPrefix)
+      body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+      body.appendString("\(value)\r\n")
+    }
+
+    body.appendString(boundaryPrefix)
+    body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+    body.appendString("Content-Type: \(mimeType)\r\n\r\n")
+    body.append(data)
+    body.appendString("\r\n")
+    body.appendString("--".appending(boundary.appending("--")))
+
+    return body as Data
+  }
+  
   @IBAction func applyFilter(_ sender: UIButton) {
     let context = CIContext(options: nil)
 
@@ -55,11 +105,7 @@ class DetailViewController: UIViewController {
       }
     }
   }
-
-  @IBAction func addOverlayText(_ sender: UIButton) {
-    showAlertTextField()
-  }
-
+  @IBAction func addOverlayText(_ sender: UIButton) { showAlertTextField() }
   private func textToImage(drawText text: String, inImage image: UIImage) -> UIImage {
     UIGraphicsBeginImageContext(image.size)
     defer { UIGraphicsEndImageContext() }
