@@ -11,7 +11,8 @@ class NetworkService {
 
   // MARK:- GET
   
-  func getDataFrom(endpoint: Endpoint, completion: @escaping (Result<Codable, NetworkError>) -> Void) {
+  func getDataFrom(endpoint: Endpoint,
+                   completion: @escaping (Result<Codable, NetworkError>) -> Void) {
 
     let url = URL(string: endpoint.rawValue)!
 
@@ -45,5 +46,60 @@ class NetworkService {
           }
       }
     }.resume()
+  }
+
+
+  func sendMultipartRequest(to urlString: String,
+                            originalURLString: String?,
+                            imageData: Data?) {
+    var request = URLRequest(url: URL(string: urlString)!)
+    request.httpMethod = "POST"
+    let boundary = "Boundary-\(UUID().uuidString)"
+    request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+    guard let selectedImageString = originalURLString else { return }
+    let params = ["appid": "nicknguyenios14",
+                  "original": selectedImageString]
+    DispatchQueue.main.async {
+      guard let imageData = imageData else { return }
+      request.httpBody = self.createBody(parameters: params,
+                                         boundary: boundary,
+                                         data: imageData,
+                                         mimeType: "image/jpeg",
+                                         filename: "hello.jpeg")
+      URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let response = response as? HTTPURLResponse {
+          print("UPLOAD STATUS CODE is \(response.statusCode)")
+        }
+        if let error = error {
+          print(error)
+        }
+      }.resume()
+    }
+  }
+
+  private func createBody(parameters: [String: String],
+                          boundary: String,
+                          data: Data,
+                          mimeType: String,
+                          filename: String) -> Data {
+
+    let body = NSMutableData()
+
+    let boundaryPrefix = "--\(boundary)\r\n"
+
+    for (key, value) in parameters {
+      body.appendString(boundaryPrefix)
+      body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+      body.appendString("\(value)\r\n")
+    }
+
+    body.appendString(boundaryPrefix)
+    body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+    body.appendString("Content-Type: \(mimeType)\r\n\r\n")
+    body.append(data)
+    body.appendString("\r\n")
+    body.appendString("--".appending(boundary.appending("--")))
+
+    return body as Data
   }
 }
